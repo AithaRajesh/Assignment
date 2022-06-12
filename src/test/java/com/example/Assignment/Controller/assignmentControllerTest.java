@@ -22,8 +22,20 @@ class assignmentControllerTest {
 
 
     @Test
-    void getEmployees() throws IOException, InterruptedException, JSONException {
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(baseURI + "employees/C1002")).GET().build();
+    void testSaveEmployee() throws IOException, InterruptedException{
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(baseURI + "employees"))
+                .header("Content-Type", "application/json; charset=UTF-8")
+                //.POST(HttpRequest.BodyPublishers.ofString(getEmployeeData("C1002").toString()))
+                .build();
+        HttpResponse <String> httpResponse = client.send(request, BodyHandlers.ofString());
+        System.out.println(httpResponse);
+    }
+
+    @Test
+    void testGetEmployees() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(baseURI + "employees/C1002"))
+                .GET()
+                .build();
         HttpResponse <String> response = client.send(request, BodyHandlers.ofString());
         JSONObject employeeDataResponse;
         try {
@@ -35,8 +47,10 @@ class assignmentControllerTest {
     }
 
     @Test
-    void getAllEmployees() throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(baseURI + "employees")).GET().build();
+    void testGetAllEmployees() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(baseURI + "employees"))
+                .GET()
+                .build();
         HttpResponse <String> response = client.send(request, BodyHandlers.ofString());
         assertNotNull(response.body().contains("Rajesh"));
         assertNotNull(response.body().contains("Sowmya"));
