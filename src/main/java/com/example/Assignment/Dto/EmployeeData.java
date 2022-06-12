@@ -8,11 +8,11 @@ import javax.persistence.*;
 public class EmployeeData {
 
     public String getEmployeeNumber() {
-        return employeeNumber;
+        return id;
     }
 
-    public void setEmployeeNumber(String employeeNumber) {
-        this.employeeNumber = employeeNumber;
+    public void setEmployeeNumber(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -48,7 +48,7 @@ public class EmployeeData {
     }
 
     @Id
-    private String employeeNumber;
+    private String id;
     @Column(name = "firstName")
     private String firstName;
     @Column(name = "lastName")
@@ -58,8 +58,8 @@ public class EmployeeData {
     @Column(name = "position")
     private String position;
 
-    public EmployeeData(String employeeNumber, String firstName, String lastName, String phoneNumber, String position) {
-        this.employeeNumber = employeeNumber;
+    public EmployeeData(String id, String firstName, String lastName, String phoneNumber, String position) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
